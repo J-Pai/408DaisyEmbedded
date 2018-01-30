@@ -11,16 +11,29 @@
  */
 Daisy::Daisy() {
     Serial.begin(115200);
+    Serial.println("Initializing Daisy!");
     #if ENABLE_DEBUG == 1
     Serial.println("Daisy's Debugging has been ENABLED!");
     #else
     Serial.println("Daisy's Debugging has been DISABLED!");
     #endif
+    pingL = -1;
+    pingR = -1;
     md.init();
 }
 
+Daisy::Daisy(int leftPingPin, int rightPingPin) : Daisy() {
+    Serial.println("Initializing Daisy with Ping Values:");
+    Serial.print("    Left:");
+    Serial.println(leftPingPin);
+    Serial.print("    Right:");
+    Serial.println(rightPingPin);
+    pingL = leftPingPin;
+    pingR = rightPingPin;
+}
+
 /**
- * Speed should be between 0 and 400
+ * Speed should be between 0 and 350
  */
 void Daisy::forward(int speed) {
     if (!validSpeed(speed)) {
@@ -32,7 +45,7 @@ void Daisy::forward(int speed) {
 }
 
 /**
- * Speed should be between 0 and 400
+ * Speed should be between 0 and 350
  */
 void Daisy::backward(int speed) {
     if (!validSpeed(speed)) {
@@ -54,7 +67,7 @@ void Daisy::halt() {
 
 /**
  * Specify direction clockwise (CW) or counter-clockwise (CCW).
- * Speed should be between 0 and 400.
+ * Speed should be between 0 and 350.
  * Time is in milliseconds.
  */
 void Daisy::turn(Dir dir, int speed, unsigned long time) {
@@ -90,13 +103,33 @@ void Daisy::stopIfFault() {
     }
 }
 void Daisy::motorL(int speed) {
+    int modifiedSpeed = speed < 0 ? 
+        (speed - (LMOTOR_COMP_BACK)) :
+        (speed + (LMOTOR_COMP_FOR));
+    #if LMOTOR == 1
+    md.setM1Speed(modifiedSpeed);
+    #elif LMOTOR == 2
+    md.setM2Speed(modifiedSpeed);
+    #else
+    DEBUGLN("Unknown Left Motor Number %d," LMOTOR)
+    #endif
 }
 
 void Daisy::motorR(int speed) {
+    int modifiedSpeed = speed < 0 ? 
+        (speed - (RMOTOR_COMP_BACK)) :
+        (speed + (RMOTOR_COMP_FOR));
+    #if RMOTOR == 1
+    md.setM1Speed(modifiedSpeed);
+    #elif RMOTOR == 2
+    md.setM2Speed(modifiedSpeed);
+    #else
+    DEBUGLN("Unknown Right Motor Number %d," RMOTOR)
+    #endif
 }
 
 bool Daisy::validSpeed(int speed) {
-    if (speed >= 0 && speed <= 400) {
+    if (speed >= 0 && speed <= 350) {
         DEBUGLN("Speed of %d is valid", speed)
         return true;
     } else {
