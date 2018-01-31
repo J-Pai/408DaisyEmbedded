@@ -1,11 +1,11 @@
 #include <Daisy.h>
 
-Daisy daisy();
+Daisy daisy;
 
 void setup() {
   // put your setup code here, to run once:
   for (int i = 0; i < 400; i++) {
-    daisy.forward(100)
+    daisy.forward(100);
     delay(1);
   }
   for (int i = 0; i < 400; i++) {
@@ -17,4 +17,4 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
 
-}
+};

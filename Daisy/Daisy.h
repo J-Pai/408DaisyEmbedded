@@ -29,6 +29,7 @@ class Daisy {
     void forward(int speed);
     void backward(int speed);
     void halt();
+    void turn(Dir dir, int speed);
     void turn(Dir dir, int speed, unsigned long time);
   private:
     DualVNH5019MotorShield md;

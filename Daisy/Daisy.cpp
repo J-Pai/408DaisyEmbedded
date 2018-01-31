@@ -61,8 +61,26 @@ void Daisy::backward(int speed) {
  */
 void Daisy::halt() {
     DEBUGLN("Daisey is stopping.")
-    motorL(0);
-    motorR(0);
+    md.setBrakes(400,400);
+}
+
+void Daisy::turn(Dir dir, int speed) {
+    if (!validSpeed(speed)) {
+        return;
+    }
+    int left = 1;
+    int right = 1;
+    if (dir == CW) {
+        DEBUGLN("Daisey is turning CW at %d speed", speed)
+        left = 1;
+        right = -1;
+    } else {
+        DEBUGLN("Daisey is turning CCW at %d speed", speed)
+        left = -1;
+        right = 1;
+    }
+    motorL(speed * left);
+    motorR(speed * right);
 }
 
 /**
@@ -85,9 +103,14 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
         left = -1;
         right = 1;
     }
-    motorL(speed * left);
-    motorR(speed * right);
+    for (int i = 0; i < time; i++) {
+        motorL(speed * left);
+        motorR(speed * right);
+        delay(1);
+    }
+    halt();
 }
+
 
 /**
  * PRIVATE FUNCTIONS

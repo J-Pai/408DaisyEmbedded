@@ -1,22 +1,20 @@
 #ifndef Daisy_Print_h
 #define Daisy_Print_h
 
-#if ENABLE_DEBUG == 1 || ENABLE_C_PRINT == 1
 #define MAX_OUT_CHARS 128
-extern char str[MAX_OUT_CHARS + 1];
-#endif
+static char buffer[MAX_OUT_CHARS + 1];
 
 #if ENABLE_DEBUG == 1
-#define DEBUG(args...) sprintf(str, args); Serial.print(str);
-#define DEBUGLN(args...) sprintf(str, args); Serial.println(str);
+#define DEBUG(args...) sprintf(buffer, args); Serial.print(buffer);
+#define DEBUGLN(args...) sprintf(buffer, args); Serial.println(buffer);
 #else
 #define DEBUG(args...)
 #define DEBUGLN(args...)
 #endif
 
 #if ENABLE_C_PRINT == 1
-#define PRINT(args...) sprintf(str, args); Serial.print(str);
-#define PRINTLN(args...) sprintf(str, args); Serial.println(str);
+#define PRINT(args...) sprintf(buffer, args); Serial.print(buffer);
+#define PRINTLN(args...) sprintf(buffer, args); Serial.println(buffer);
 #else
 #define PRINT(args...)
 #define PRINTLN(args...)
