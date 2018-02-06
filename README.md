@@ -15,7 +15,7 @@ With the motor shield connected, the only two pins that appear to be available a
 ## Setup
 Before building and executing the code, make sure to include the Daisey directory/library in the Arduino's base libraries folder. To do this, create a symbolic link between the Daisey directory and a directory in the Arduino libraries folder. 
 
-The command to do this can be found below (this only applies to Linux distributions):
+The command to do this can be found below (this only applies to Linux distributions, might be possible if you have git bash on windows):
 ```bash
 ln -s ~/Arduino/408DaisyEmbedded/Daisy/ ~/Arduino/libraries/
 ```
