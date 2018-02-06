@@ -17,19 +17,17 @@ Daisy::Daisy() {
     #else
     Serial.println("Daisy's Debugging has been DISABLED!");
     #endif
-    pingL = -1;
-    pingR = -1;
     md.init();
 }
 
 Daisy::Daisy(int leftPingPin, int rightPingPin) : Daisy() {
-    Serial.println("Initializing Daisy with Ping Values:");
+    Serial.println("Initializing Daisy with Ping pins:");
     Serial.print("    Left:");
     Serial.println(leftPingPin);
     Serial.print("    Right:");
     Serial.println(rightPingPin);
-    pingL = leftPingPin;
-    pingR = rightPingPin;
+    pingL = Ping(leftPingPin, L_IN_MOD, L_CM_MOD);
+    pingR = Ping(rightPingPin, R_IN_MOD, R_CM_MOD);
 }
 
 /**
@@ -111,6 +109,41 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
     halt();
 }
 
+/**
+ * Following functions provide the interface necessary to obtain distance data
+ * for the left and right ping sensors. User can obtain either inches, cm, or 
+ * raw data from the left and right ping sensors in order to determine distance.
+ * Offsets/calibration can be set in the Daisy's header file.
+ */
+double Daisy::leftPingIN() {
+    pingL.fire();
+    return pingL.inches();
+}
+
+double Daisy::rightPingIN() {
+    pingR.fire();
+    return pingR.inches();
+}
+
+double Daisy::leftPingCM() {
+    pingL.fire();
+    return pingL.centimeters();
+}
+
+double Daisy::rightPingCM() {
+    pingR.fire();
+    return pingR.centimeters();
+}
+
+int Daisy::leftPingRAW() {
+    pingL.fire();
+    return pingL.microseconds();
+}
+
+int Daisy::rightPingRAW() {
+    pingR.fire();
+    return pingR.microseconds();
+}
 
 /**
  * PRIVATE FUNCTIONS
