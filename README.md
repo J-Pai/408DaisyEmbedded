@@ -10,6 +10,7 @@ The code for the library is in the directory called Daisy. This code is meant to
 Code for the ping sensors was pulled from the following resource found [here](https://playground.arduino.cc/Code/NewPing). This code was modified to include a default constructor and checks in the fire function to ensure that the fire operation would not be executed if the pins have not been properly initialized.
 
 When initializing left and right ping sensor pins, make sure to provide a value larger than or equal to 2 (pretty much, don't use pins 0 and 1 on the arduino).
+With the motor shield connected, the only two pins that appear to be available are pins 3 and 5.
 
 ## Setup
 Before building and executing the code, make sure to include the Daisey directory/library in the Arduino's base libraries folder. To do this, create a symbolic link between the Daisey directory and a directory in the Arduino libraries folder. 
