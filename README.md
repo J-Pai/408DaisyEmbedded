@@ -7,7 +7,7 @@ The main embedded code is called 408DaisyEmbedded.ino. The target for this code 
 
 The code for the library is in the directory called Daisy. This code is meant to interface with the Pololu Dual VNH5019 Motor Shield. The GIT repository for the library associated with the motor shield can be found [here](https://github.com/pololu/dual-vnh5019-motor-shield). This library also contains the functions necessary to obtain relative distance data from the two Ping sensors mounted on the front of Daisy. In order to use these functions, be sure to initialize Daisy with the second constructor and specify the pins used to connect the ping sensors to the Arduino.
 
-Code for the ping sensors was pulled from the following resource found [here](https://playground.arduino.cc/Code/NewPing). This code was modified to include a default constructor and checks in the fire function to ensure that the fire operation would not be executed if the pins have not been properly initialized.
+Code for the ping sensors was pulled from the following resource found [here](https://playground.arduino.cc/Code/NewPing). This code was modified to include a default constructor.
 
 When initializing left and right ping sensor pins, make sure to provide a value larger than or equal to 2 (pretty much, don't use pins 0 and 1 on the arduino).
 With the motor shield connected, the only two pins that appear to be available are pins 3 and 5.
