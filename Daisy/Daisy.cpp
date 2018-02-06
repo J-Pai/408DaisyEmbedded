@@ -163,7 +163,7 @@ void Daisy::motorL(int speed) {
         (speed - (LMOTOR_COMP_BACK)) :
         (speed + (LMOTOR_COMP_FOR));
     #if LMOTOR == 1
-	DEBUGLN("Left motor 1") HelloWorld
+	DEBUGLN("Left motor 1")
     md.setM1Speed(modifiedSpeed);
     #elif LMOTOR == 2
 	DEBUGLN("Left motor 2")
