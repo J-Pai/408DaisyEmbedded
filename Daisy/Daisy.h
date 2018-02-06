@@ -10,7 +10,6 @@
 #include "Arduino.h"
 #include "DualVNH5019MotorShield.h"
 #include "NewPing.h"
-#include "Ping.h"
 
 #define LMOTOR 1
 #define RMOTOR 2
@@ -20,13 +19,6 @@
 #define LMOTOR_COMP_BACK 0
 #define RMOTOR_COMP_FOR 0
 #define RMOTOR_COMP_BACK 0
-
-// Used to provide compensation for left and right ping cm and in measurements.
-#define L_IN_MOD 0.0
-#define L_CM_MOD 0.0
-
-#define R_IN_MOD 0.0
-#define R_CM_MOD 0.0
 
 enum Dir {CW, CCW};
 
@@ -43,12 +35,12 @@ class Daisy {
     double rightPingIN();
     double leftPingCM();
     double rightPingCM();
-    int leftPingRAW();
-    int rightPingRAW();
+    long leftPingRAW();
+    long rightPingRAW();
   private:
     DualVNH5019MotorShield md;
-    Ping pingL;
-    Ping pingR;
+    NewPing pingL;
+    NewPing pingR;
 
     void stopIfFault();
     void motorL(int speed);

@@ -26,8 +26,8 @@ Daisy::Daisy(int leftPingPin, int rightPingPin) : Daisy() {
     Serial.println(leftPingPin);
     Serial.print("    Right:");
     Serial.println(rightPingPin);
-    pingL = Ping(leftPingPin, L_IN_MOD, L_CM_MOD);
-    pingR = Ping(rightPingPin, R_IN_MOD, R_CM_MOD);
+    pingL = NewPing(leftPingPin, leftPingPin);
+    pingR = NewPing(rightPingPin, rightPingPin);
 }
 
 /**
@@ -55,10 +55,10 @@ void Daisy::backward(int speed) {
 }
 
 /**
- * Halts Daisey T.T
+ * Halts Daisy T.T
  */
 void Daisy::halt() {
-    DEBUGLN("Daisey is stopping.")
+    DEBUGLN("Daisy is stopping.")
     md.setBrakes(400,400);
 }
 
@@ -69,11 +69,11 @@ void Daisy::turn(Dir dir, int speed) {
     int left = 1;
     int right = 1;
     if (dir == CW) {
-        DEBUGLN("Daisey is turning CW at %d speed", speed)
+        DEBUGLN("Daisy is turning CW at %d speed", speed)
         left = 1;
         right = -1;
     } else {
-        DEBUGLN("Daisey is turning CCW at %d speed", speed)
+        DEBUGLN("Daisy is turning CCW at %d speed", speed)
         left = -1;
         right = 1;
     }
@@ -93,11 +93,11 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
     int left = 1;
     int right = 1;
     if (dir == CW) {
-        DEBUGLN("Daisey is turning CW at %d speed for %lu time", speed, time)
+        DEBUGLN("Daisy is turning CW at %d speed for %lu time", speed, time)
         left = 1;
         right = -1;
     } else {
-        DEBUGLN("Daisey is turning CCW at %d speed for %lu time", speed, time)
+        DEBUGLN("Daisy is turning CCW at %d speed for %lu time", speed, time)
         left = -1;
         right = 1;
     }
@@ -116,33 +116,27 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
  * Offsets/calibration can be set in the Daisy's header file.
  */
 double Daisy::leftPingIN() {
-    pingL.fire();
-    return pingL.inches();
+    return pingL.ping_in();
 }
 
 double Daisy::rightPingIN() {
-    pingR.fire();
-    return pingR.inches();
+    return pingR.ping_in();
 }
 
 double Daisy::leftPingCM() {
-    pingL.fire();
-    return pingL.centimeters();
+    return pingL.ping_cm();
 }
 
 double Daisy::rightPingCM() {
-    pingR.fire();
-    return pingR.centimeters();
+    return pingR.ping_cm();
 }
 
-int Daisy::leftPingRAW() {
-    pingL.fire();
-    return pingL.microseconds();
+long Daisy::leftPingRAW() {
+    return pingL.ping_median();
 }
 
-int Daisy::rightPingRAW() {
-    pingR.fire();
-    return pingR.microseconds();
+long Daisy::rightPingRAW() {
+    return pingR.ping_median();
 }
 
 /**
