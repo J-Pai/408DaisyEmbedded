@@ -9,6 +9,7 @@
 #include "Daisy_Print.h"
 #include "Arduino.h"
 #include "DualVNH5019MotorShield.h"
+#include "NewPing.h"
 #include "Ping.h"
 
 #define LMOTOR 1
