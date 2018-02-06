@@ -81,7 +81,7 @@ void loop()
       Serial.println(md.getM2CurrentMilliamps());
     }
     delay(2);
-  }
+  } 
   
   for (int i = 400; i >= -400; i--)
   {

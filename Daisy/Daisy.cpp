@@ -37,7 +37,7 @@ void Daisy::forward(int speed) {
     if (!validSpeed(speed)) {
         return;
     }
-    DEBUGLN("Moving forward at %d speed", speed)
+    //DEBUGLN("Moving forward at %d speed", speed)
     motorL(speed);
     motorR(speed);
 }
@@ -49,7 +49,7 @@ void Daisy::backward(int speed) {
     if (!validSpeed(speed)) {
         return;
     }
-    DEBUGLN("Moving backward at %d speed", speed)
+    //DEBUGLN("Moving backward at %d speed", speed)
     motorL(-speed);
     motorR(-speed);
 }
@@ -163,8 +163,10 @@ void Daisy::motorL(int speed) {
         (speed - (LMOTOR_COMP_BACK)) :
         (speed + (LMOTOR_COMP_FOR));
     #if LMOTOR == 1
+	Serial.println("Left motor 1")
     md.setM1Speed(modifiedSpeed);
     #elif LMOTOR == 2
+	Serial.println("Left motor 2")
     md.setM2Speed(modifiedSpeed);
     #else
     DEBUGLN("Unknown Left Motor Number %d," LMOTOR)
@@ -176,8 +178,10 @@ void Daisy::motorR(int speed) {
         (speed - (RMOTOR_COMP_BACK)) :
         (speed + (RMOTOR_COMP_FOR));
     #if RMOTOR == 1
+	Serial.println("Right motor 1")
     md.setM1Speed(modifiedSpeed);
     #elif RMOTOR == 2
+	Serial.println("Right motor 2")
     md.setM2Speed(modifiedSpeed);
     #else
     DEBUGLN("Unknown Right Motor Number %d," RMOTOR)
