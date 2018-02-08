@@ -4,11 +4,6 @@
 /**
  * PUBLIC FUNCTIONS
  */
-/**
- * Note md is a private variable that represents the motor shield object.
- * Documentation for functions associated with the object DualVNH5019MotorShield
- * can be found 
- */
 Daisy::Daisy() {
     Serial.begin(115200);
     Serial.println("Initializing Daisy!");
@@ -30,33 +25,25 @@ Daisy::Daisy(int leftPingPin, int rightPingPin) : Daisy() {
     pingR = NewPing(rightPingPin, rightPingPin);
 }
 
-/**
- * Speed should be between 0 and 350
- */
+
 void Daisy::forward(int speed) {
     if (!validSpeed(speed)) {
         return;
     }
-    //DEBUGLN("Moving forward at %d speed", speed)
+    DEBUGLN("Moving forward at %d speed", speed)
     motorL(speed);
     motorR(speed);
 }
 
-/**
- * Speed should be between 0 and 350
- */
 void Daisy::backward(int speed) {
     if (!validSpeed(speed)) {
         return;
     }
-    //DEBUGLN("Moving backward at %d speed", speed)
+    DEBUGLN("Moving backward at %d speed", speed)
     motorL(-speed);
     motorR(-speed);
 }
 
-/**
- * Halts Daisy T.T
- */
 void Daisy::halt() {
     DEBUGLN("Daisy is stopping.")
     md.setBrakes(400,400);
@@ -81,11 +68,6 @@ void Daisy::turn(Dir dir, int speed) {
     motorR(speed * right);
 }
 
-/**
- * Specify direction clockwise (CW) or counter-clockwise (CCW).
- * Speed should be between 0 and 350.
- * Time is in milliseconds.
- */
 void Daisy::turn(Dir dir, int speed, unsigned long time) {
     if (!validSpeed(speed)) {
         return;
@@ -109,33 +91,27 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
     halt();
 }
 
-/**
- * Following functions provide the interface necessary to obtain distance data
- * for the left and right ping sensors. User can obtain either inches, cm, or 
- * raw data from the left and right ping sensors in order to determine distance.
- * Offsets/calibration can be set in the Daisy's header file.
- */
-double Daisy::leftPingIN() {
+unsigned long Daisy::leftPingIN() {
     return pingL.ping_in();
 }
 
-double Daisy::rightPingIN() {
+unsigned long Daisy::rightPingIN() {
     return pingR.ping_in();
 }
 
-double Daisy::leftPingCM() {
+unsigned long Daisy::leftPingCM() {
     return pingL.ping_cm();
 }
 
-double Daisy::rightPingCM() {
+unsigned long Daisy::rightPingCM() {
     return pingR.ping_cm();
 }
 
-long Daisy::leftPingRAW() {
+unsigned long Daisy::leftPingRAW() {
     return pingL.ping_median();
 }
 
-long Daisy::rightPingRAW() {
+unsigned long Daisy::rightPingRAW() {
     return pingR.ping_median();
 }
 

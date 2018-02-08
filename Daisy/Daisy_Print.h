@@ -1,6 +1,10 @@
 #ifndef Daisy_Print_h
 #define Daisy_Print_h
 
+/**
+* The following defines macros to provide C like printing functionality.
+*/
+
 #define MAX_OUT_CHARS 128
 static char buffer[MAX_OUT_CHARS + 1];
 
