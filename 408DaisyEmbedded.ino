@@ -11,7 +11,7 @@ Daisy daisy;
 
 void setup() {
     // put your setup code here, to run once:
-    daisy = Daisy(3,5);
+    daisy = Daisy(3,5,11);
     PRINTLN("Daisy has been initialized!")
 }
 
