@@ -16,7 +16,7 @@ Daisy::Daisy() {
 }
 
 Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin) : Daisy() {
-  Serial.begin(115200);
+  //Serial.begin(115200);
   Serial.println("Initializing Daisy with Ping pins:");
   Serial.print("    Left:");
   Serial.println(leftPingPin);
@@ -143,7 +143,7 @@ void Daisy::stopIfFault() {
   }
 }
 void Daisy::motorL(int speed) {
-  int modifiedSpeed = speed < 0 ? 
+  int modifiedSpeed = speed < 0 ?
     (speed - (LMOTOR_COMP_BACK)) :
     (speed + (LMOTOR_COMP_FOR));
 #if LMOTOR == 1
@@ -158,7 +158,7 @@ void Daisy::motorL(int speed) {
 }
 
 void Daisy::motorR(int speed) {
-  int modifiedSpeed = speed < 0 ? 
+  int modifiedSpeed = speed < 0 ?
     (speed - (RMOTOR_COMP_BACK)) :
     (speed + (RMOTOR_COMP_FOR));
 #if RMOTOR == 1

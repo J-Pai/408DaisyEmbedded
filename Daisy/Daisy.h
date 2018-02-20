@@ -1,9 +1,9 @@
 #ifndef Daisey_h
 #define Daisey_h
 
-// Following three lines enables DEBUG and PRINT macro operations. Make sure 
+// Following three lines enables DEBUG and PRINT macro operations. Make sure
 // to include Daisy_Print.h header file.
-#define ENABLE_DEBUG 0 // Set to 1 to enable debugging print statements
+#define ENABLE_DEBUG 1 // Set to 1 to enable debugging print statements
 #define ENABLE_C_PRINT 1 // Set to 1 to enable C like print statements
 
 #include "Daisy_Print.h"
