@@ -11,26 +11,27 @@ void setup() {
 }
 
 void loop() {
-
+  int inByte = ' ';
   unsigned long leftPing = daisy.leftPingIN();
   unsigned long rightPing = daisy.rightPingIN();
   unsigned long middlePing = daisy.middlePingIN();
+
+  while (!Serial.available()) {
+  } 
+  inByte = Serial.read(); // read the incoming data
+  Serial.print("INPUT: ");
+  Serial.println(inByte); // send the data back in a new line so that it is not all one long line
+
+  switch (inByte) {
+    case 0: daisy.halt(); break;
+    case 1: daisy.forward(100); break;
+    case 2: daisy.turn(CW,100); break;
+    case 3: daisy.turn(CCW,100); break;
+    case 4: daisy.backward(100); break;
+    default: daisy.halt(); break;
+    
+  }
  
-  if(middlePing <= THRESHOLD){ // if center ping see obstacle and others dont then Stop
-    daisy.halt();
-  }
-  else if(leftPing <= THRESHOLD && rightPing <= THRESHOLD){ // if both sides have obstacles in front of them turn until 
-    daisy.turn(CW,100);
-  }
-  else if(leftPing <= THRESHOLD && rightPing >= THRESHOLD){ // avoid obstacle on the left and turn 
-    daisy.turn(CW,100);
-  }
-  else if(rightPing <= THRESHOLD && leftPing >= THRESHOLD){ // avoid obstacle on the right and turn 
-    daisy.turn(CCW,100);
-  }
-  else{
-    daisy.forward(100);
-  }
-  
+  delay(100);
     
 }
