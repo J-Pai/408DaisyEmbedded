@@ -22,6 +22,7 @@ void loop() {
   Serial.print("INPUT: ");
   Serial.println(inByte); // send the data back in a new line so that it is not all one long line
 
+
   switch (inByte) {
     case 0: daisy.halt(); break;
     case 1: daisy.forward(100); break;
@@ -31,6 +32,7 @@ void loop() {
     default: daisy.halt(); break;
     
   }
+  
  
   delay(100);
     
