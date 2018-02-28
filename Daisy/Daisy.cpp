@@ -4,8 +4,8 @@
 /**
  * PUBLIC FUNCTIONS
  */
-Daisy::Daisy() {
-  Serial.begin(115200);
+Daisy::Daisy(int baudRate = 9600) {
+  Serial.begin(baudRate);
   Serial.println("Initializing Daisy!");
 #if ENABLE_DEBUG == 1
   Serial.println("Daisy's Debugging has been ENABLED!");
@@ -15,7 +15,7 @@ Daisy::Daisy() {
   md.init();
 }
 
-Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin) : Daisy() {
+Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin, int baudRate = 9600) : Daisy(baudRate) {
   //Serial.begin(115200);
   Serial.println("Initializing Daisy with Ping pins:");
   Serial.print("    Left:");
