@@ -1,9 +1,5 @@
 #include <Daisy.h>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> bc0a8d475dc4f329b84989530d9db41b11fe1beb
 #define THRESHOLD 5L
 
 Daisy daisy;
