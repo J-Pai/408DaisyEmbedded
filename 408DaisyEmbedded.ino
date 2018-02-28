@@ -1,36 +1,42 @@
 #include <Daisy.h>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bc0a8d475dc4f329b84989530d9db41b11fe1beb
 #define THRESHOLD 5L
 
 Daisy daisy;
 
 void setup() {
   // put your setup code here, to run once:
-  daisy = Daisy();
-
-  unsigned long leftPing = daisy.leftPingIN();
-  unsigned long rightPing = daisy.rightPingIN();
-  unsigned long middlePing = daisy.middlePingIN();
-  
+  daisy = Daisy(3,5,11);
+  // PRINTLN("Daisy initialized!");
 }
 
 void loop() {
-  
-  if(middlePing <= THRESHOLD && (leftPing > THRESHOLD && rightPing > THRESHOLD)){ // if center ping see obstacle and others dont then Stop
-    halt();
-      }
-  else if(leftPing <= THRESHOLD && rightPing <= THRESHOLD){ // if both sides have obstacles in front of them turn until 
-    turn(CW,100);
-      }
-  else if(leftPing <= THRESHOLD && rightPing >= THRESHOLD){ // avoid obstacle on the left and turn 
-    turn(CW,50);
-      }
-  else if(rightPing <= THRESHOLD && leftPing >= THRESHOLD){ // avoid obstacle on the right and turn 
-    turn(CCW,50);
-      }
-  else{
-    daisy.forward(100);
-    }
-    
+  int inByte = ' ';
+  unsigned long leftPing = daisy.leftPingIN();
+  unsigned long rightPing = daisy.rightPingIN();
+  unsigned long middlePing = daisy.middlePingIN();
+
+  while (!Serial.available()) {
+  }
+  inByte = Serial.read(); // read the incoming data
+  Serial.print("INPUT: ");
+  Serial.println(inByte); // send the data back in a new line so that it is not all one long line
+
+
+  switch (inByte) {
+    case 0: daisy.halt(); break;
+    case 1: daisy.forward(100); break;
+    case 2: daisy.turn(CW,100); break;
+    case 3: daisy.turn(CCW,100); break;
+    case 4: daisy.backward(100); break;
+    default: daisy.halt(); break;
+
+  }
+
+
+  delay(100);
 }
