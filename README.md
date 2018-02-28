@@ -25,7 +25,7 @@ Make sure to also import the library for the motor shield. Directions for how to
 
 NEW 02/28/2018: The folder that contains the source for the motor shield library has now been included. If you are using an older IDE, make sure to create a symbolic link in the Arduino libraries folder for the motor shield library. The directory/library name is called DualVNH5019MotorShield.
 
-Command to do such as action is as follows:
+Command to create symbolic link for motor shield library is as follows:
 ```bash
 ln -s ~/Arduino/DaisyEmbedded/DualVNH5019MotorShield ~/Arduino/libraries
 ```
