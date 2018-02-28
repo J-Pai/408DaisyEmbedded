@@ -1,3 +1,5 @@
+#include <DualVNH5019MotorShield.h>
+
 #include <Daisy.h>
 
 #define THRESHOLD 5L

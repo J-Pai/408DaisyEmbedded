@@ -33,8 +33,8 @@ class Daisy {
      * initialized. No print statements (Serial, DEBUG, PRINT) will work if placed
      * before Daisy intialization code unless the user does Serial.begin manually.
      */
-    Daisy();
-    Daisy(int leftPingPin, int rightPingPin, int middlePingPin);
+    Daisy(int baudRate = 9600);
+    Daisy(int leftPingPin, int rightPingPin, int middlePingPin, int baudRate = 9600);
 
     /**
      * Speed should be between 0 and 350
