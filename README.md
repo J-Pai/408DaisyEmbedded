@@ -13,12 +13,19 @@ When initializing left and right ping sensor pins, make sure to provide a value 
 With the motor shield connected, the only two pins that appear to be available are pins 3 and 5.
 
 ## Setup
-Before building and executing the code, make sure to include the Daisey directory/library in the Arduino's base libraries folder. To do this, create a symbolic link between the Daisey directory and a directory in the Arduino libraries folder. 
+Before building and executing the code, make sure to include the Daisey directory/library in the Arduino's base libraries folder. To do this, create a symbolic link between the Daisey directory and a directory in the Arduino libraries folder.
 
 The command to do this can be found below (this only applies to Linux distributions, might be possible if you have git bash on windows):
 ```bash
-ln -s ~/Arduino/408DaisyEmbedded/Daisy/ ~/Arduino/libraries/
+ln -s ~/Arduino/DaisyEmbedded/Daisy/ ~/Arduino/libraries/
 ```
 You should not need to use the Arduino IDE's import library function in order to import Daisy's library. The header file for Daisy's library has already been included.
 
 Make sure to also import the library for the motor shield. Directions for how to do so can be found in the README of the motor shield's repository. The link to the repository can be found above.
+
+NEW 02/28/2018: The folder that contains the source for the motor shield library has now been included. If you are using an older IDE, make sure to create a symbolic link in the Arduino libraries folder for the motor shield library. The directory/library name is called DualVNH5019MotorShield.
+
+Command to do such as action is as follows:
+```bash
+ln -s ~/Arduino/DaisyEmbedded/DualVNH5019MotorShield ~/Arduino/libraries
+```
