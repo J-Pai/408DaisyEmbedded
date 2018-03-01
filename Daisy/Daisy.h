@@ -91,6 +91,7 @@ class Daisy {
     NewPing pingR;
     NewPing pingM;
 
+    Daisy(int baudRate);
     void stopIfFault();
     void motorL(int speed);
     void motorR(int speed);
