@@ -4,29 +4,36 @@
 /**
  * PUBLIC FUNCTIONS
  */
+Daisy::Daisy() {
+}
+
 Daisy::Daisy(int baudRate) {
   Serial.begin(baudRate);
   Serial.println("Initializing Daisy!");
 #if ENABLE_DEBUG == 1
-  Serial.println("Daisy's Debugging has been ENABLED!");
+  DEBUGLN("DEBUG ENABLED")
 #else
-  Serial.println("Daisy's Debugging has been DISABLED!");
+  Serial.println("DEBUG DISABLED");
 #endif
+#if ENABLE_C_PRINT == 1
+  PRINTLN("C PRINT ENABLED")
+#else
+  Serial.println("C PRINT DISABLED");
+#endif
+  Serial.print("Baud Rate: ");
+  Serial.println(baudRate);
   md.init();
 }
 
 Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin, int baudRate) : Daisy(baudRate) {
-  //Serial.begin(115200);
-  Serial.println("Initializing Daisy with Ping pins:");
-  Serial.print("    Left:");
-  Serial.println(leftPingPin);
-  Serial.print("    Right:");
-  Serial.println(rightPingPin);
+  PRINTLN("Initializing Daisy with Ping pins:")
+  PRINTLN("   left: %d", leftPingPin)
+  PRINTLN("    Right: %d", rightPingPin)
   pingL = NewPing(leftPingPin, leftPingPin);
   pingR = NewPing(rightPingPin, rightPingPin);
   pingM = NewPing(middlePingPin, middlePingPin);
 }
-
+;
 
 void Daisy::forward(int speed) {
   if (!validSpeed(speed)) {
@@ -85,7 +92,7 @@ void Daisy::turn(Dir dir, int speed, unsigned long time) {
       left = -1;
     right = 1;
   }
-  for (int i = 0; i < time; i++) {
+  for (unsigned long i = 0; i < time; i++) {
     motorL(speed * left);
     motorR(speed * right);
     delay(1);

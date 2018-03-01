@@ -5,22 +5,23 @@
 Daisy daisy;
 
 void setup() {
-  // put your setup code here, to run once:
-  daisy = Daisy(3,5,11);
-  // PRINTLN("Daisy initialized!");
+  daisy = Daisy(3,5,11,9600);
 }
 
 void loop() {
   int inByte = ' ';
+  
+  /*
   unsigned long leftPing = daisy.leftPingIN();
   unsigned long rightPing = daisy.rightPingIN();
   unsigned long middlePing = daisy.middlePingIN();
-
+  */
+  
   while (!Serial.available()) {
   }
-  inByte = Serial.read(); // read the incoming data
+  inByte = Serial.read();
   Serial.print("INPUT: ");
-  Serial.println(inByte); // send the data back in a new line so that it is not all one long line
+  Serial.println(inByte);
 
 
   switch (inByte) {
