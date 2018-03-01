@@ -34,8 +34,7 @@ class Daisy {
      * before Daisy intialization code unless the user does Serial.begin manually.
      */
     Daisy();
-    Daisy(int baudRate);
-    Daisy(int leftPingPin, int rightPingPin, int middlePingPin, int baudRate);
+    Daisy(int leftPingPin, int rightPingPin, int middlePingPin);
 
     /**
      * Speed should be between 0 and 350

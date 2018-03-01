@@ -5,7 +5,7 @@
 Daisy daisy;
 
 void setup() {
-  daisy = Daisy(3,5,11,9600);
+  daisy = Daisy(3,5,11);
 }
 
 void loop() {
