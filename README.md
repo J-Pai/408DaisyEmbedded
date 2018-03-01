@@ -29,3 +29,8 @@ Command to create symbolic link for motor shield library is as follows:
 ```bash
 ln -s ~/Arduino/DaisyEmbedded/DualVNH5019MotorShield ~/Arduino/libraries
 ```
+
+# Jetson USB Communication
+It appears that there are some issues getting the Jetson to communicate with an Arduino. The following repository contains the scripts necessary to setup a module that will allow the Jetson to communicate with an Arduino microcontroller. This is important as it enables the Jetson to push code to the Arduino and do serial communication.
+
+[installACMModule](https://github.com/jetsonhacks/installACMModule)
