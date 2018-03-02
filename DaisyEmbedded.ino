@@ -1,7 +1,7 @@
 #include <Daisy.h>
 
 #define THRESHOLD 5L
-#define MOVE_TIMEOUT 10000.0F //Milliseconds
+#define MOVE_TIMEOUT 1000.0F //Milliseconds
 
 Daisy daisy;
 int prevByte = 0;
@@ -17,23 +17,23 @@ void setup() {
 void loop() {
 
   currTime = millis();
-  
+
   while (!Serial.available() && currTime - lastMoveCmd < MOVE_TIMEOUT) {
     currTime = millis();
   }
-  
+
   int inByte = 0;
-  
+
   if (Serial.available()) {
     inByte = Serial.read();
     newData = true;
   }
-  
+
   if (newData) {
     PRINTLN("InputByte: %d, PrevByte: %d", inByte, prevByte);
     newData = false;
   }
-  
+
   if (inByte < 200 && inByte != prevByte ) {
     switch (inByte) {
       case 0: daisy.halt(); break;
@@ -43,7 +43,7 @@ void loop() {
       case 4: daisy.backward(100); break;
       default: daisy.halt(); break;
     }
-    
+
     prevByte = inByte;
     lastMoveCmd = millis();
   } else {
@@ -55,6 +55,6 @@ void loop() {
     }
 
   }
-  
+
   delay(100);
 }
