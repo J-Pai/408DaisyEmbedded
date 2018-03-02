@@ -1,10 +1,14 @@
 #include <Daisy.h>
 
 #define THRESHOLD 5L
+#define MOVE_TIMEOUT 10000.0F //Milliseconds
 
 Daisy daisy;
-int prevMoveByte = 0;
+int prevByte = 0;
 int prevParam = 0;
+float currTime = 0.0F;
+float lastMoveCmd = 0.0F;
+int newData = 0;
 
 void setup() {
   daisy = Daisy(3,5,11);
@@ -12,12 +16,25 @@ void setup() {
 
 void loop() {
 
+  currTime = millis();
   
-  while (!Serial.available()) {
+  while (!Serial.available() && currTime - lastMoveCmd < MOVE_TIMEOUT) {
+    currTime = millis();
   }
   
-  int inByte = Serial.read();
-  if (inByte < 200 && inByte != prevMoveByte) {
+  int inByte = 0;
+  
+  if (Serial.available()) {
+    inByte = Serial.read();
+    newData = true;
+  }
+  
+  if (newData) {
+    PRINTLN("InputByte: %d, PrevByte: %d", inByte, prevByte);
+    newData = false;
+  }
+  
+  if (inByte < 200 && inByte != prevByte ) {
     switch (inByte) {
       case 0: daisy.halt(); break;
       case 1: daisy.forward(100); break;
@@ -27,10 +44,8 @@ void loop() {
       default: daisy.halt(); break;
     }
     
-    if (inByte >= 0) {
-      PRINTLN("InputByte: %d, PrevByte: %d", inByte, prevByte);
-    }
-    prevMoveyte;
+    prevByte = inByte;
+    lastMoveCmd = millis();
   } else {
     switch(inByte) {
       case 253: PRINTLN("LEFT_DIST: %d", daisy.leftPingIN()); break;
@@ -38,9 +53,7 @@ void loop() {
       case 255: PRINTLN("MID_DIST: %d", daisy.middlePingIN()); break;
       default: break;
     }
-    if (inByte >= 0) {
-      PRINTLN("InputByte: %d, PrevByte: %d", inByte, prevByte);
-    }
+
   }
   
   delay(100);

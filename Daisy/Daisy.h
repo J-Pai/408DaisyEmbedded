@@ -1,6 +1,7 @@
 #ifndef Daisey_h
 #define Daisey_h
 
+#define BAUD_RATE 28800
 // Following three lines enables DEBUG and PRINT macro operations. Make sure
 // to include Daisy_Print.h header file.
 #define ENABLE_DEBUG 0 // Set to 1 to enable debugging print statements

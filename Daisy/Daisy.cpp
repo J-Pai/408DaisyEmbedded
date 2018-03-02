@@ -23,7 +23,7 @@ Daisy::Daisy(int baudRate) {
   md.init();
 }
 
-Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin) : Daisy(9600) {
+Daisy::Daisy(int leftPingPin, int rightPingPin, int middlePingPin) : Daisy(BAUD_RATE) {
   PRINTLN("Initializing Daisy with Ping pins:")
   PRINTLN("   left: %d", leftPingPin)
   PRINTLN("    Right: %d", rightPingPin)
