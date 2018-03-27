@@ -19,10 +19,10 @@ int serialReadInt() {
   return ret;
 }
 
-void moveDaisy(Daisy d) {
+void moveDaisy() {
   int leftSpeed = serialReadInt();
   int rightSpeed = serialReadInt();
-  d.move(leftSpeed, rightSpeed);
+  daisy.move(leftSpeed, rightSpeed);
   PRINT("(passed_data=[%d,%d])", leftSpeed, rightSpeed); 
 }
 
@@ -47,11 +47,11 @@ void loop() {
     PRINT("(move_code=%d)", inByte);
     switch (inByte) {
       case 0: daisy.halt(); break;
-      case 1: daisy.forward(100); break;
-      case 2: daisy.turn(CW,100); break;
-      case 3: daisy.turn(CCW,100); break;
-      case 4: daisy.backward(100); break;
-      case 5: moveDaisy(daisy); break;
+      case 1: daisy.forward(80); break;
+      case 2: daisy.turn(CW,50); break;
+      case 3: daisy.turn(CCW,50); break;
+      case 4: daisy.backward(80); break;
+      case 5: moveDaisy(); break;
       default: daisy.halt(); break;
     }
     PRINTLN("(END)");
