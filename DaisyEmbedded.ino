@@ -23,7 +23,7 @@ void moveDaisy() {
   int leftSpeed = serialReadInt();
   int rightSpeed = serialReadInt();
   daisy.move(leftSpeed, rightSpeed);
-  PRINT("(passed_data=[%d,%d])", leftSpeed, rightSpeed); 
+  //PRINT("(passed_data=[%d,%d])", leftSpeed, rightSpeed); 
 }
 
 void setup() {
@@ -44,7 +44,8 @@ void loop() {
   }
 
   if (inByte < 200) {
-    PRINT("(move_code=%d)", inByte);
+    //PRINT("(move_code=%d)", inByte);
+    PRINTLN("%d", inByte);
     switch (inByte) {
       case 0: daisy.halt(); break;
       case 1: daisy.forward(80); break;
@@ -54,7 +55,7 @@ void loop() {
       case 5: moveDaisy(); break;
       default: daisy.halt(); break;
     }
-    PRINTLN("(END)");
+    //PRINTLN("(END)");
     lastMoveCmd = millis();
   } else {
     switch(inByte) {
